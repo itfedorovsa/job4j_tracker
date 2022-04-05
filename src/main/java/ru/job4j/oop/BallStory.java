@@ -10,6 +10,5 @@ public class BallStory {
         hare.tryEat(ball);
         angryWolf.tryEat(ball);
         fox.tryEat(ball);
-
     }
 }
