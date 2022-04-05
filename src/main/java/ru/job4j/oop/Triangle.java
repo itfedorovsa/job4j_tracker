@@ -29,6 +29,6 @@ public class Triangle {
             double p = semiPerimeter(ab, ac, bc);
             return Math.sqrt(p * (p - ab) * (p - ac) * (p - bc));
         }
-        return rsl;
+        return -1;
     }
 }
