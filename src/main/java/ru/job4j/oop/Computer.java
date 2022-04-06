@@ -22,12 +22,6 @@ public class Computer {
         this.cpu = cpu;
     }
 
-    public Computer(int ssd, String cpu, boolean multiMonitor) {
-        this.multiMonitor = multiMonitor;
-        this.ssd = ssd;
-        this.cpu = cpu;
-    }
-
     public Computer(boolean multiMonitor, double ssd, String cpu) {
         this.multiMonitor = multiMonitor;
         this.ssd = (int) ssd;
