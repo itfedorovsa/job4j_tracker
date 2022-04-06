@@ -9,18 +9,7 @@ public class Engineer extends Profession {
         this.project = project;
     }
 
-    public Engineer(String project) {
-        this.project = project;
-    }
-
-    public Engineer() {
-    }
-
-    public String getName() {
-        return super.getName();
-    }
-
     public String makeProject() {
-        return "Project of anything";
+        return super.getEducation();
     }
 }

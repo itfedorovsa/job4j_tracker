@@ -9,18 +9,7 @@ public class Builder extends Engineer {
         this.construction = construction;
     }
 
-    public Builder(String construction) {
-        this.construction = construction;
-    }
-
-    public Builder() {
-    }
-
-    public String buildHouse() {
-        return "I can build a house";
-    }
-
-    public String makeProject() {
+    public String kindOfHouse() {
         return super.makeProject();
     }
 }

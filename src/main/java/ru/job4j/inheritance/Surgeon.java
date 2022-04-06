@@ -9,6 +9,7 @@ public class Surgeon extends Doctor {
         this.surgery = surgery;
     }
 
-    public Surgeon() {
+    public String canSurgeries() {
+        return super.knowHealing();
     }
 }

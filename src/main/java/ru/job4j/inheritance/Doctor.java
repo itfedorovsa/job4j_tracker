@@ -9,6 +9,7 @@ public class Doctor extends Profession {
         this.healing = healing;
     }
 
-    public Doctor() {
+    public String knowHealing() {
+        return super.getEducation();
     }
 }

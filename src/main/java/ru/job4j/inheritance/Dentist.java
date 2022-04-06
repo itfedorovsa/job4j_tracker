@@ -9,6 +9,7 @@ public class Dentist extends Doctor {
         this.dentistry = dentistry;
     }
 
-    public Dentist() {
+    public String canFixTeeth() {
+        return super.knowHealing();
     }
 }
