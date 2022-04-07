@@ -12,19 +12,16 @@ public class Library {
         library[1] = chapter2;
         library[2] = chapter3;
         library[3] = chapter4;
-        for (int index = 0; index < library.length; index++) {
-            Book parts = library[index];
+        for (Book parts : library) {
             System.out.println(parts.getName() + " - " + parts.getPages());
         }
         Book temp = library[0];
         library[0] = library[3];
         library[3] = temp;
-        for (int index = 0; index < library.length; index++) {
-            Book parts = library[index];
+        for (Book parts : library) {
             System.out.println(parts.getName() + " - " + parts.getPages());
         }
-        for (int index = 0; index < library.length; index++) {
-            Book parts = library[index];
+        for (Book parts : library) {
             if (parts.getName().equals("Clean Code")) {
                 System.out.println(parts.getName());
             }
