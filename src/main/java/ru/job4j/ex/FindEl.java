@@ -15,6 +15,22 @@ public class FindEl {
         return rsl;
     }
 
+    public static boolean sent(String values, String[] abuses) throws ElementAbuseException {
+        return true;
+    }
+
+    public static void process(String[] value, String key, String[] abuses) {
+        try {
+            if (indexOf(value, key) != -1) {
+                sent(key, abuses);
+            }
+        } catch (ElementAbuseException ea) {
+            ea.printStackTrace();
+        } catch (ElementNotFoundException en) {
+            en.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         String[] array = {"1", "2", "3"};
         try {
