@@ -19,8 +19,8 @@ public final class SingleTracker {
         return tracker.add(item);
     }
 
-    public Item[] showAll() {
-        return null;
+    public Item[] findAll() {
+        return tracker.findAll();
     }
 
     public Item[] findByName(String key) {
