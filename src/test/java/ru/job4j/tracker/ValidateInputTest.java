@@ -33,15 +33,15 @@ public class ValidateInputTest {
     public void whenMultipleValidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"1", "1", "1"}
+                new String[] {"1", "2", "3"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected, is(1));
         int selecte = input.askInt("Enter menu:");
-        assertThat(selecte, is(1));
+        assertThat(selecte, is(2));
         int select = input.askInt("Enter menu:");
-        assertThat(select, is(1));
+        assertThat(select, is(3));
     }
 
     @Test
