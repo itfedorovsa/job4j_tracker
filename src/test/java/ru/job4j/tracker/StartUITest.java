@@ -3,6 +3,8 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -173,5 +175,37 @@ public class StartUITest {
                                 + "0. Exit Program" + ln
                 )
         );
+    }
+
+    @Test
+    public void whenItemAscByName() {
+        List<Item> items = Arrays.asList(
+                new Item(2, "Paul"),
+                new Item(4, "Bob"),
+                new Item(3, "John")
+        );
+        Collections.sort(items, new ItemAscByName());
+        List<Item> expected = Arrays.asList(
+                new Item(4, "Bob"),
+                new Item(3, "John"),
+                new Item(2, "Paul")
+        );
+        assertThat(items, is(expected));
+    }
+
+    @Test
+    public void whenItemDescByName() {
+        List<Item> items = Arrays.asList(
+                new Item(3, "Paul"),
+                new Item(2, "Bob"),
+                new Item(4, "John")
+        );
+        Collections.sort(items, new ItemDescByName().reversed());
+        List<Item> expected = Arrays.asList(
+                new Item(3, "Paul"),
+                new Item(4, "John"),
+                new Item(2, "Bob")
+        );
+        assertThat(items, is(expected));
     }
 }
