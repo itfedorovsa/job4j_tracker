@@ -200,7 +200,7 @@ public class StartUITest {
                 new Item(2, "Bob"),
                 new Item(4, "John")
         );
-        Collections.sort(items, new ItemDescByName().reversed());
+        Collections.sort(items, new ItemDescByName());
         List<Item> expected = Arrays.asList(
                 new Item(3, "Paul"),
                 new Item(4, "John"),
