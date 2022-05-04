@@ -2,8 +2,18 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * The class describes the bank's customer model.
+ */
 public class User {
+    /**
+     * The field contains the client's passport data.
+     */
     private String passport;
+
+    /**
+     * The field contains the client's full name.
+     */
     private String username;
 
     public User(String passport, String username) {
