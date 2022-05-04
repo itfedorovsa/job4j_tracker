@@ -3,22 +3,22 @@ package ru.job4j.search;
 import java.util.LinkedList;
 
 /**
- * Класс описывает работу простейшей очереди по приоритету, которая работает
- * по принципу FIFO (first in - first out)
+ * The class describes the operation of the simple priority queue,
+ * which operates according to the FIFO (first in - first out) principle.
  * @author Sergey Fedorov
  * @version 1.0
  */
 public class PriorityQueue {
     /**
-     * Хранение задания осуществляется в коллекции типа LinkedList
+     * The task is stored in a collection of the LinkedList type.
      */
     private LinkedList<Task> tasks = new LinkedList<>();
 
     /**
-     * Метод принимает на вход заявку и добавляет ее в очередь.
-     * Если встречаются 2 задания с одинаковым приоритетом, то в очереди
-     * они распределяются по принципу FIFO.
-     * @param task задача которая добавляется в очередь
+     * The method accepts the request for input and adds it to the queue.
+     * If there are 2 tasks with the same priority,
+     * then they are distributed in the queue according to the FIFO principle.
+     * @param task the task that is being added to the queue.
      */
     public void put(Task task) {
         int index = 0;
@@ -32,8 +32,8 @@ public class PriorityQueue {
     }
 
     /**
-     * Метод позволяет получить первую задачу в очереди
-     * @return возвращает задачу из головы очереди или null если очередь пуста
+     * The method allows to get the first task in the queue
+     * @return returns the task from the head of the queue or returns null if queue is empty
      */
     public Task take() {
         return tasks.poll();
