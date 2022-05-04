@@ -9,7 +9,6 @@ public class StringCompare implements Comparator<String> {
     @Override
     public int compare(String left, String right) {
         int rsl;
-        int count = Integer.compare(left.length(), right.length());
         int length = Math.min(left.length(), right.length());
         for (int index = 0; index < length; index++) {
             rsl = Character.compare(left.charAt(index), right.charAt(index));
@@ -17,6 +16,6 @@ public class StringCompare implements Comparator<String> {
                 return rsl;
             }
         }
-        return count;
+        return Integer.compare(left.length(), right.length());
     }
 }
