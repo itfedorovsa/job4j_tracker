@@ -6,10 +6,17 @@ public class DepDescComp implements Comparator<String> {
 
     @Override
     public int compare(String o1, String o2) {
-        if (o1.charAt(0) == o2.charAt(0) && o1.charAt(1) == o2.charAt(1)) {
-            return o1.compareTo(o2);
-        } else {
-            return o2.compareTo(o1);
+        String first = "";
+        String second = "";
+        for (String el : o1.split("/")) {
+            first = el;
+            break;
         }
+        for (String el : o2.split("/")) {
+            second = el;
+            break;
+        }
+        int rsl = second.compareTo(first);
+        return (rsl == 0) ? o1.compareTo(o2) : rsl;
     }
 }
