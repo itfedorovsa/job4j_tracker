@@ -29,8 +29,8 @@ public class FuncCountInRangeTest {
     @Test
     public void whenExponentialFunctionThenExponentialResults() {
         FuncCountInRange funcRange = new FuncCountInRange();
-        List<Double> result = funcRange.diapason(1, 4, x -> Math.pow(x, 3));
-        List<Double> expected = Arrays.asList(1D, 8D, 27D);
+        List<Double> result = funcRange.diapason(1, 4, x -> Math.pow(3, x));
+        List<Double> expected = Arrays.asList(3D, 9D, 27D);
         assertThat(result, is(expected));
     }
 
