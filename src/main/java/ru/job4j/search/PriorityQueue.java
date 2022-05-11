@@ -21,7 +21,7 @@ public class PriorityQueue {
      * @param task the task that is being added to the queue.
      */
     public void put(Task task) {
-        int index = 0;
+        var index = 0;
         for (Task element : tasks) {
             if (task.getPriority() < element.getPriority()) {
                 break;
