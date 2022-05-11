@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * The class describes the operation of the banking system (a service for creating banking accounts,
@@ -45,12 +46,11 @@ public class BankService {
      * @return returns an existing bank customer or null if the customer is not found.
      */
     public User findByPassport(String passport) {
-        for (User owner : users.keySet()) {
-            if (owner.getPassport().equals(passport)) {
-                return owner;
-            }
-        }
-        return null;
+        return users.keySet()
+                .stream()
+                .filter(owner -> owner.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -61,14 +61,15 @@ public class BankService {
      */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
+        Account account = null;
         if (user != null) {
-            for (Account acc : users.get(user)) {
-                if (acc.getRequisite().equals(requisite)) {
-                    return acc;
-                }
-            }
+            account = users.get(findByPassport(passport))
+                    .stream()
+                    .filter(acc -> acc.getRequisite().equals(requisite))
+                    .findFirst()
+                    .orElse(null);
         }
-        return null;
+        return account;
     }
 
     /**
