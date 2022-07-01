@@ -39,7 +39,7 @@ public class SqlTracker implements Store, AutoCloseable {
                      cn.prepareStatement("insert into items(name, id, created) values (?, ?, ?) returning(id);",
         Statement.RETURN_GENERATED_KEYS)) {
             state.setString(1, item.getName());
-            state.setInt(2, ids++); //item.getId()
+            state.setInt(2, ids++);
             state.setTimestamp(3, Timestamp.valueOf(item.getCreated()));
             state.execute();
             try (ResultSet itemId = state.getGeneratedKeys()) {
