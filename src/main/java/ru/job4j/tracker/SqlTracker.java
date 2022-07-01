@@ -9,7 +9,13 @@ import java.util.Properties;
 public class SqlTracker implements Store, AutoCloseable {
 
     private Connection cn;
-    private int ids = 1;
+
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
 
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
@@ -36,11 +42,10 @@ public class SqlTracker implements Store, AutoCloseable {
     @Override
     public Item add(Item item) {
         try (PreparedStatement state =
-                     cn.prepareStatement("insert into items(name, id, created) values (?, ?, ?) returning(id);",
+                     cn.prepareStatement("insert into items(name, created) values (?, ?);",
         Statement.RETURN_GENERATED_KEYS)) {
             state.setString(1, item.getName());
-            state.setInt(2, ids++);
-            state.setTimestamp(3, Timestamp.valueOf(item.getCreated()));
+            state.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             state.execute();
             try (ResultSet itemId = state.getGeneratedKeys()) {
                 if (itemId.next()) {
