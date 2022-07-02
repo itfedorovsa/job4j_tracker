@@ -32,6 +32,13 @@ public class SqlTracker implements Store, AutoCloseable {
         }
     }
 
+    private Item toItem(ResultSet rslSetEl) throws SQLException {
+        return new Item(
+                rslSetEl.getInt("id"),
+                rslSetEl.getString("name"),
+                rslSetEl.getTimestamp("created").toLocalDateTime());
+    }
+
     @Override
     public void close() throws Exception {
         if (cn != null) {
@@ -93,11 +100,7 @@ public class SqlTracker implements Store, AutoCloseable {
                 cn.prepareStatement("select * from items;")) {
             try (ResultSet rslQuery = state.executeQuery()) {
                 while (rslQuery.next()) {
-                    list.add(new Item(
-                        rslQuery.getInt("id"),
-                        rslQuery.getString("name"),
-                        rslQuery.getTimestamp("created").toLocalDateTime())
-                    );
+                    list.add(toItem(rslQuery));
                 }
             }
         } catch (SQLException e) {
@@ -114,12 +117,7 @@ public class SqlTracker implements Store, AutoCloseable {
             state.setString(1, key);
             try (ResultSet rslQuery = state.executeQuery()) {
                 while (rslQuery.next()) {
-                    list.add(new Item(
-                            rslQuery.getInt("id"),
-                            rslQuery.getString("name"),
-                            rslQuery.getTimestamp("created").toLocalDateTime()
-                            )
-                    );
+                    list.add(toItem(rslQuery));
                 }
             }
         } catch (SQLException e) {
@@ -135,11 +133,7 @@ public class SqlTracker implements Store, AutoCloseable {
             state.setInt(1, id);
             try (ResultSet rslQuery = state.executeQuery()) {
                 if (rslQuery.next()) {
-                    return new Item(
-                            rslQuery.getInt("id"),
-                            rslQuery.getString("name"),
-                            rslQuery.getTimestamp("created").toLocalDateTime()
-                    );
+                    return toItem(rslQuery);
                 }
             }
         } catch (SQLException e) {
