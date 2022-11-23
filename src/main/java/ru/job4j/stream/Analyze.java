@@ -17,25 +17,25 @@ public class Analyze {
 
     public static List<Tuple> averageScoreBySubject(Stream<Pupil> stream) {
         return stream
-                .map(pupil -> new Tuple(
-                        pupil.getName(),
-                        pupil.getSubjects().stream()
-                        .mapToInt(Subject::getScore)
-                        .average()
-                        .orElse(-1D))
-                )
+                .flatMap(subject -> subject.getSubjects().stream())
+                .collect(Collectors.groupingBy(Subject::getName,
+                        LinkedHashMap::new,
+                        Collectors.averagingDouble(Subject::getScore)))
+                .entrySet()
+                .stream()
+                .map(tuple -> new Tuple(tuple.getKey(), tuple.getValue()))
                 .collect(Collectors.toList());
     }
 
     public static List<Tuple> averageScoreByPupil(Stream<Pupil> stream) {
         return stream
-                .flatMap(subject -> subject.getSubjects().stream())
-                .collect(Collectors.groupingBy(Subject::getName,
-                         LinkedHashMap::new,
-                         Collectors.averagingDouble(Subject::getScore)))
-                .entrySet()
-                .stream()
-                .map(tuple -> new Tuple(tuple.getKey(), tuple.getValue()))
+                .map(pupil -> new Tuple(
+                        pupil.getName(),
+                        pupil.getSubjects().stream()
+                                .mapToInt(Subject::getScore)
+                                .average()
+                                .orElse(-1D))
+                )
                 .collect(Collectors.toList());
     }
 
