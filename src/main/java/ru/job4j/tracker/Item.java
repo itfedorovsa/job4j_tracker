@@ -21,7 +21,7 @@ public class Item {
     @Getter
     @Setter
     @EqualsAndHashCode.Include
-    private int id;
+    private Integer id;
 
     @Getter
     @Setter
@@ -35,7 +35,7 @@ public class Item {
         this.name = name;
     }
 
-    public Item(int id, String name) {
+    public Item(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
