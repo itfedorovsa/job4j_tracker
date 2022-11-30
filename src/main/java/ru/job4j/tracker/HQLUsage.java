@@ -7,21 +7,24 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 
+import java.time.LocalDateTime;
+
 public class HQLUsage {
     public static void main(String[] args) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure().build();
         try (SessionFactory sf = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory()) {
+            Item item = new Item(0, "name", LocalDateTime.now());
             Session session = sf.openSession();
             findAll(session);
+            insert(session, item);
             unique(session);
             findById(session, 6);
             update(session, 6);
             findById(session, 6);
             delete(session, 5);
             findAll(session);
-            insert(session);
             findAll(session);
             session.close();
         } finally {
@@ -30,7 +33,7 @@ public class HQLUsage {
     }
 
     public static void findAll(Session session) {
-        Query query = session.createQuery("FROM Item");
+        Query<Item> query = session.createQuery("FROM Item", Item.class);
         for (Object st : query.list()) {
             System.out.println(st);
         }
@@ -76,13 +79,10 @@ public class HQLUsage {
         }
     }
 
-    public static void insert(Session session) {
+    public static void insert(Session session, Item item) {
         try {
             session.beginTransaction();
-            session.createQuery(
-                            "INSERT INTO Item (name) VALUES (:fName)")
-                    .setParameter("fName", "name1")
-                    .executeUpdate();
+            session.save(item);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
