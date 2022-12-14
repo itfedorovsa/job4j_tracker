@@ -7,23 +7,21 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 
-import java.time.LocalDateTime;
-
 public class HQLUsage {
     public static void main(String[] args) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure().build();
         try (SessionFactory sf = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory()) {
-            Item item = new Item(0, "name", LocalDateTime.now());
+            Item item = new Item("name");
             Session session = sf.openSession();
-            findAll(session);
             insert(session, item);
+            findAll(session);
             unique(session);
             findById(session, 6);
             update(session, 6);
             findById(session, 6);
-            delete(session, 5);
+            delete(session, item.getId());
             findAll(session);
             findAll(session);
             session.close();

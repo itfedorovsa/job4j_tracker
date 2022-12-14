@@ -5,6 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +23,7 @@ public class SqlTrackerTest {
 
     @BeforeClass
     public static void initConnection() {
-        try (InputStream in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("test.properties")) {
+        try (InputStream in = new FileInputStream("db/liquibase_test.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -67,8 +68,9 @@ public class SqlTrackerTest {
     @Test
     public void whenAddAndDelete() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = tracker.add(new Item("item"));
-        tracker.delete(item.getId());
+        tracker.add(new Item("item"));
+        Item rsl = tracker.findByName("item").get(0);
+        tracker.delete(rsl.getId());
         assertThat(tracker.findAll(), is(new ArrayList<>()));
     }
 

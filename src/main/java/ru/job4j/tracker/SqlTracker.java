@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,15 +11,14 @@ public class SqlTracker implements Store, AutoCloseable {
 
     private Connection cn;
 
-    public SqlTracker() {
-    }
+    public SqlTracker() { }
 
     public SqlTracker(Connection cn) {
         this.cn = cn;
     }
 
     public void init() {
-        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+        try (InputStream in = new FileInputStream("db/liquibase.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
