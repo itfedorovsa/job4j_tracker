@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "j_user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,6 @@ public class User {
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "j_user_id")
+    @JoinColumn(name = "user_id")
     private List<UserMessenger> messengers;
 }

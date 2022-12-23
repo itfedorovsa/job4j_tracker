@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode.Include;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "j_user_notification")
+@Table(name = "user_notifications")
 public class UserMessenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
