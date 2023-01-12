@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -140,5 +141,9 @@ public class SqlTracker implements Store, AutoCloseable {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(LocalDateTime.now());
     }
 }
