@@ -46,5 +46,6 @@ public class StartUI {
                 new DeleteManyItems(output)
         );
         new StartUI(output).init(input, tracker, actions);
+
     }
 }

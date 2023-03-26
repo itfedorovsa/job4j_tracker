@@ -18,7 +18,7 @@ public class HibernateRun {
             item.setName("Learn Hibernate");
             create(item, sf);
             System.out.println(item);
-            item.setName("Learn Hibernate 5.");
+            /*item.setName("Learn Hibernate 5.");
             update(item, sf);
             System.out.println(item);
             Item rsl = findById(item.getId(), sf);
@@ -27,7 +27,7 @@ public class HibernateRun {
             List<Item> list = findAll(sf);
             for (Item it : list) {
                 System.out.println(it);
-            }
+            }*/
         }  catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -74,9 +74,10 @@ public class HibernateRun {
     public static Item findById(Integer id, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        Item result = session.get(Item.class, id);
+        Item result = session.load(Item.class, id);
         session.getTransaction().commit();
         session.close();
         return result;
     }
+
 }

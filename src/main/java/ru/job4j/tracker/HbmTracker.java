@@ -22,6 +22,8 @@ public class HbmTracker implements Store, AutoCloseable {
         try {
             session.beginTransaction();
             session.save(item);
+            session.delete(item);
+            session.save(item);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
