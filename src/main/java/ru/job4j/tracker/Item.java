@@ -8,6 +8,18 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "getItems",
+                query = "FROM Item"
+
+        ),
+        @NamedQuery(
+                name = "getItemById",
+                query = "FROM Item WHERE id = :iId"
+
+        )}
+)
 @Entity
 @Table(name = "items")
 @Data

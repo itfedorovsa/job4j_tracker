@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HbmTracker implements Store, AutoCloseable {
+
     private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private final SessionFactory sf = new MetadataSources(registry)
@@ -21,8 +22,6 @@ public class HbmTracker implements Store, AutoCloseable {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            session.save(item);
-            session.delete(item);
             session.save(item);
             session.getTransaction().commit();
         } catch (Exception e) {
