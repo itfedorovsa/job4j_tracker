@@ -28,8 +28,11 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
+
     private String name;
+
     private LocalDateTime created = LocalDateTime.now().withSecond(0).withNano(0);
 
     @ManyToMany
