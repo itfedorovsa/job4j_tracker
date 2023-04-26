@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import ru.job4j.toone.User;
 
 import javax.persistence.*;
@@ -28,12 +29,12 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
 
     private String name;
 
-    private LocalDateTime created = LocalDateTime.now().withSecond(0).withNano(0);
+    @Type(type = "ru.job4j.tracker.customtypes.LocalDateTimeToString")
+    private LocalDateTime created = LocalDateTime.now();
 
     @ManyToMany
     @JoinTable(
